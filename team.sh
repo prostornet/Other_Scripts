@@ -35,11 +35,11 @@ if [ -e ${FDEVBOND} ]; then exit 0; fi
 if [ ${TYP} = "B" ]; then
   if [ ${MOD} = "AB" ]; then
     echo "Bonding in Active-Backup mode is deprecated, we are going to build Team Active-Backup"
-    nmcli con add type team con-name team0 ifname team0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns '10.128.132.84 10.132.138.121 10.164.134.69' ipv4.method manual ipv6.method ignore
+    nmcli con add type team con-name team0 ifname team0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns 'dns_addr1 dns_addr2 dns_addr3' ipv4.method manual ipv6.method ignore
     echo "TEAM_CONFIG='{\"runner\":{\"name\":\"activebackup\"},\"link_watch\":{\"name\":\"ethtool\"}}'" >> ${FDEVTEAM}
     cr_tm_ports
   elif [ ${MOD} = "LA" ]; then
-    nmcli con add type bond con-name bond0 ifname bond0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns '10.128.132.84 10.132.138.121 10.164.134.69' ipv4.method manual ipv6.method ignore
+    nmcli con add type bond con-name bond0 ifname bond0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns 'dns_addr1 dns_addr2 dns_addr3' ipv4.method manual ipv6.method ignore
     sed -i '/BONDING_OPTS/d' ${FDEVBOND}
     echo "BONDING_OPTS=\"miimon=100 mode=802.3ad lacp_rate=1\"" >> ${FDEVBOND}
     cr_bd_ports
@@ -49,11 +49,11 @@ if [ ${TYP} = "B" ]; then
   fi
 elif [ ${TYP} = "T" ]; then
   if [ ${MOD} = "AB" ]; then
-    nmcli con add type team con-name team0 ifname team0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns '10.128.132.84 10.132.138.121 10.164.134.69' ipv4.method manual ipv6.method ignore
+    nmcli con add type team con-name team0 ifname team0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns 'dns_addr1 dns_addr2 dns_addr3' ipv4.method manual ipv6.method ignore
     echo "TEAM_CONFIG='{\"runner\":{\"name\":\"activebackup\"},\"link_watch\":{\"name\":\"ethtool\"}}'" >> ${FDEVTEAM}
     cr_tm_ports
   elif [ ${MOD} = "LA" ]; then
-    nmcli con add type team con-name team0 ifname team0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns '10.128.132.84 10.132.138.121 10.164.134.69' ipv4.method manual ipv6.method ignore
+    nmcli con add type team con-name team0 ifname team0 ip4 ${IPADDR} gw4 ${GWADDR} ipv4.dns 'dns_addr1 dns_addr2 dns_addr3' ipv4.method manual ipv6.method ignore
     echo "TEAM_CONFIG='{\"runner\":{\"name\":\"lacp\",\"active\":true,\"fast_rate\":true,\"tx_hash\":[\"eth\",\"ipv4\",\"ipv6\"]},\"link_watch\":{\"name\":\"ethtool\"},\"ports\":{\"port1\":{},\"port2\":{}}}'" >> ${FDEVTEAM}
     cr_tm_ports
   else
