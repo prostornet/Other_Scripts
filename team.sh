@@ -24,7 +24,7 @@ while read line; do
 done < ${FDEVTMP}
 }
 
-read -p "Select Bonding(B) or Beaming(T): " TYP
+read -p "Select Bonding(B) or Teaming(T): " TYP
 read -p "Select mode Active-Backup(AB) or LACP(LA): " MOD
 read -p "Set ip addres with mask prefix: " IPADDR
 read -p "Set gw addres: " GWADDR
